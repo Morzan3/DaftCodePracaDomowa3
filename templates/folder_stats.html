@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Statystyki dla {{ folder_name }}</title>
+</head>
+<body>
+    <h1>Nazwa: {{ folder_name }}</h1>
+    <h2>Wielkość: {{ folder_size }}</h2>
+    <h2>Rodzic: <a href={{ url_for('return_stats', my_path=parent_path) }}>
+                    {{ parent_name }}
+                </a>
+    </h2>
+    <h2>Dzieci:</h2>
+    <ul>
+        {% for key, value in children_folders|dictsort %}
+        <li>
+            <a href={{ url_for('return_stats', my_path=key) }}>
+                {{ key }}: {{ value }}
+            </a>
+        </li>
+        {% endfor %}
+
+
+        {% for key, value in children_files|dictsort %}
+        <li>
+            {{ key }}: {{ value }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
